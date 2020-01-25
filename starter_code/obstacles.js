@@ -1,25 +1,25 @@
-class Obstacle{
-    constructor(ctx) {
+const randomInt = (min, max) =>
+    Math.floor(Math.random() * (max - min + 1) + min);
+
+class ObstacleBot {
+    constructor(ctx, w, h) {
         this.ctx = ctx
-        this.width = 138
-        this.height = 793
+        this.width = w
+        this.height = h
         this.image = new Image()
-        this.image.src = "./images/obstacle_top.png"
-        this.posX = canvas.width;
-        this.posY = 0;
-        this.velX = 10;
+        this.image.src = "./images/obstacle_bottom.png"
+
+        this.width = 69
+        this.height = 397
+
+        this.posX = 700
+        this.posY = randomInt(300, 500)
+        this.velX = 5
     }
     draw() {
-        this.ctx.drawImage(
-            this.image,
-            this.posX,
-            this.posY,
-            this.width,
-            this.height
-        );
+        this.ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height);
     }
     move() {
-        this.posX -= this.velX;
-        if (this.posX <= -this.width) { this.posX = 0 }
+        this.posX -= this.velX
     }
 }

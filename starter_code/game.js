@@ -25,41 +25,37 @@ const game = {
             this.drawAll();
             this.moveAll();
             this.generateObstacles();
-            // this.clearObstacles();
+            this.clearObstacles();
         }, 1000 / this.fps);
-
-
-
     },
 
     reset() {
         this.background = new Background(this.ctx, this.width, this.height);
         this.player = new Player(this.ctx, this.canvas.width, this.canvas.height, this.keys);
-        this.obstables = [];
+        this.obstacles = [];
     },
 
     drawAll() {
         this.background.draw();
         this.player.draw();
-        this.obstacles.forEach(obstacle => obstacle.draw());
+        this.obstacles.forEach(obs => obs.draw())
     },
 
     moveAll() {
-        this.background.move();
-        this.player.move();
-        this.obstacle.move();
+        this.background.move()
+        this.obstacles.forEach(obs => obs.move())
+        this.player.move()
     },
 
     generateObstacles() {
-        if (this.framesCounter % 70 == 0) {
-            console.log("prueba")
-            this.obstacles.push(new obstacle(this.ctx))
-
+        if (this.framesCounter % 90 == 0) {
+            this.obstacles.push(new ObstacleBot(this.ctx, this.w, this.h));
+            console.log(this.obstacles);
         }
     },
 
-    // clearObstacles() {
-    //     this.obstacles = this.obstacles.filter(ObstacleT => ObstacleT.posX >= 0);
-    // },
+    clearObstacles() {
+        this.obstacles = this.obstacles.filter(obs => obs.posX >= -100);
+    },
 
 }
